@@ -6,7 +6,7 @@ console.log(`chrome_bin is ${chrome_bin}`);
 console.log(`chrome_shim is ${chrome_shim}`);
 
 var server = prerender({
-  chromeLocation: chrome_bin,
+  chromeLocation: chrome_shim,
 });
 
 server.use(prerender.sendPrerenderHeader());
