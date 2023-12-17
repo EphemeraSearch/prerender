@@ -5,6 +5,8 @@ console.log(`chrome_shim is ${chrome_shim}`);
 
 var server = prerender({
   chromeLocation: chrome_shim,
+  logRequests: true,
+  captureConsoleLog: true,
 });
 
 server.use(prerender.sendPrerenderHeader());
