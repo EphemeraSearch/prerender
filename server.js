@@ -7,6 +7,13 @@ var server = prerender({
   chromeLocation: chrome_shim,
   logRequests: true,
   captureConsoleLog: true,
+  chromeFlags: [
+    "--no-sandbox",
+    "--headless",
+    "--disable-gpu",
+    "--remote-debugging-port=9222",
+    "--hide-scrollbars",
+  ],
 });
 
 server.use(prerender.sendPrerenderHeader());
