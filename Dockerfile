@@ -41,4 +41,6 @@ RUN npm install
 COPY . .
 
 ENV CACHE_TTL=86400
+ENV LOG_REQUESTS=true
+ENV CAPTURE_CONSOLE_LOG=true
 CMD ["server.js"]

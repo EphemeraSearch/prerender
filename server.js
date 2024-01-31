@@ -17,11 +17,12 @@ var server = prerender({
 
 server.use(prerender.sendPrerenderHeader());
 server.use(prerender.browserForceRestart());
-// server.use(prerender.blockResources());
+server.use(prerender.blockResources());
+server.use(prerender.forceCacheRefresh());
 server.use(prerender.addMetaTags());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
-server.options.ttl = process.env["CACHE_TTL"] || 60 * 60 * 24 * 3; // 3 days
+server.options.ttl = process.env["CACHE_TTL"] || 60 * 60 * 24 * 3; // 3 days. Must come before `server.use(require("prerender-level-cache"))`
 console.log("server.options.ttl", server.options.ttl);
 server.use(require("prerender-level-cache"));
 
