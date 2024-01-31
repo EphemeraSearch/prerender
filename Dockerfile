@@ -40,6 +40,5 @@ COPY ./package-lock.json .
 RUN npm install
 COPY . .
 
-ENV CACHE_MAXSIZE=1000
 ENV CACHE_TTL=86400
 CMD ["server.js"]
