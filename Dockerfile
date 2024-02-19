@@ -27,9 +27,14 @@ RUN apt-get update && apt-get install -y \
     libvulkan1
 
  # Chrome instalation
-RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-  && apt-get install -y ./google-chrome-stable_current_amd64.deb \
-  && rm google-chrome-stable_current_amd64.deb
+ARG CHROME_VERSION="120.0.6099.199-1"
+RUN wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
+  && apt install -y /tmp/chrome.deb \
+  && rm /tmp/chrome.deb
+
+#   RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+#     && apt-get install -y ./google-chrome-stable_current_amd64.deb \
+#     && rm google-chrome-stable_current_amd64.deb
 
 # Check chrome version
 RUN echo "Chrome: " && google-chrome --version
