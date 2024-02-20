@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prerender
+  annotations: &annotations
+    reloader.stakater.com/auto: 'true'
+    repo: prerender
+    version: '${VERSION}'
+  labels: &labels
+    app: prerender
+    tags.datadoghq.com/env: '${ENV_NAME_LONG}'
+    tags.datadoghq.com/service: 'prerender'
+    tags.datadoghq.com/version: '${VERSION}'
+spec:
+  selector:
+    matchLabels:
+      app: prerender
+  template:
+    metadata:
+      annotations: *annotations
+      labels: *labels
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: prerender
+          image: ${REGISTRY_SLASH}prerender:${VERSION}
+          imagePullPolicy: Always
+          command: ['bash', '-c']
+          args: ['sleep infinity']
+          resources:
+            requests:
+              cpu: '459m'
+              memory: '1074Mi'
+          env:
+            - name: DD_GIT_REPOSITORY_URL
+              value: 'https://github.com/EphemeraSearch/prerender'
+            - name: VERSION
+              value: '${VERSION}'
+            - name: DD_GIT_COMMIT_SHA
+              value: '${VERSION}'
+          ports:
+            - containerPort: 3000
+              name: prerender
+          volumeMounts:
+            - name: leveldb
+              mountPath: '/src/db/'
+      volumes:
+        - name: leveldb
+          persistentVolumeClaim:
+            claimName: leveldb
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: prerender
+    tags.datadoghq.com/env: '${ENV_NAME_LONG}'
+    tags.datadoghq.com/service: 'prerender'
+    tags.datadoghq.com/version: '${VERSION}'
+  name: leveldb
+  namespace: ${NAMESPACE}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 25Gi
+  # storageClassName: gp2
+  # volumeMode: Filesystem
+  # volumeName: pvc-69359fa6-50fd-4249-a27e-443241d04f29
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prerender
+  annotations:
+    repo: ephemerasearch.com
+    version: '${VERSION}'
+  labels:
+    app: web
+    repo: ephemerasearch.com
+    tags.datadoghq.com/env: '${ENV_NAME_LONG}'
+    tags.datadoghq.com/service: 'prerender'
+    tags.datadoghq.com/version: '${VERSION}'
+    version: '${VERSION}'
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: prerender
+      name: prerender
+  selector:
+    app: prerender

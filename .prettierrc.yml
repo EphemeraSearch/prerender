@@ -1,0 +1,15 @@
+arrowParens: always
+bracketSameLine: false
+bracketSpacing: true
+jsxSingleQuote: true
+printWidth: 100
+semi: true
+singleQuote: true
+tabWidth: 2
+trailingComma: all
+useTabs: false
+overrides:
+  - files: '*.md'
+    options:
+      tabWidth: 2 # Don't require extra spaces in bulleted lists
+# TODO: fix operator-linebreak (as it's called by eslint) so `||` appears at the beginning of a line

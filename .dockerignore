@@ -1,2 +1,5 @@
 .git
 node_modules
+keys.txt
+package-lock.heroku-working.json
+.envrc

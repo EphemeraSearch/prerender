@@ -7,3 +7,5 @@ node_modules/
 .vscode/
 .envrc
 db/
+keys.txt
+package-lock.heroku-working.json
