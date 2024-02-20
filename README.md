@@ -321,6 +321,14 @@ Caches pages in memory. Available at [prerender-memory-cache](https://github.com
 
 Caches pages in S3. Available at [coming soon](https://github.com/prerender/prerender)
 
+### leveldb cache
+
+https://github.com/maxlath/prerender-level-cache
+
+https://www.npmjs.com/package/prerender-level-cache
+
+To interact, use a tool like: https://github.com/maxlath/lev2
+
 --------------------
 
 ### <a id='prerendercom'></a>
