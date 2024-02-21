@@ -9,7 +9,7 @@
     "url": "https://github.com/EphemeraSearch/prerender"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=16"
   },
   "dependencies": {
     "app-root-path": "^1.0.0",
