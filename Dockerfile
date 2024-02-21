@@ -1,6 +1,6 @@
 # h/t https://stackoverflow.com/a/73067588/1991403
 
-FROM node:16.16.0 as base
+FROM node:20.11.1 as base
 # Chrome dependency Instalation
 RUN apt-get update && apt-get install -y \
     fonts-liberation \

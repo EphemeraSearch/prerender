@@ -354,6 +354,8 @@ To interact, use a tool like [lev2](https://github.com/maxlath/lev2):
 npm install -g lev2
 ```
 
+Set environment variable `CACHE_TTL` to the number of seconds entries should be cached for.
+
 ---
 
 ### <a id='prerendercom'></a>

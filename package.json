@@ -9,15 +9,17 @@
     "url": "https://github.com/EphemeraSearch/prerender"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=20"
   },
   "dependencies": {
+    "app-root-path": "^1.0.0",
     "body-parser": "^1.19.0",
     "chrome-remote-interface": "^0.30.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "he": "^1.2.0",
-    "prerender-level-cache": "^3.0.2",
+    "level-party": "^4.0.0",
+    "level-ttl": "^3.1.1",
     "uuid": "^8.3.2",
     "valid-url": "^1.0.9"
   },
