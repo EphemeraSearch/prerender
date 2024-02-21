@@ -12,6 +12,7 @@ var server = prerender({
     '--disable-gpu',
     '--remote-debugging-port=9222',
     '--hide-scrollbars',
+    '--remote-debugging-address=::1',
   ],
   pageLoadTimeout: Number(process.env['PAGE_LOAD_TIMEOUT']) || 40 * 1000,
 });
