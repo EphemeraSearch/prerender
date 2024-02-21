@@ -1,3 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prerender
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/backend-protocol: 'HTTP'
+    repo: prerender
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ${SUBDOMAIN}.ephemerasearch.com
+      http: &http_rules
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prerender
+                port:
+                  number: 3000
+  tls:
+    - secretName: ${SUBDOMAIN}-tls
+      hosts:
+        - ${SUBDOMAIN}.ephemerasearch.com
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,9 +62,11 @@ spec:
           env:
             - name: DD_GIT_REPOSITORY_URL
               value: 'https://github.com/EphemeraSearch/prerender'
-            - name: VERSION
-              value: '${VERSION}'
             - name: DD_GIT_COMMIT_SHA
+              value: '${VERSION}'
+            - name: DD_VERSION
+              value: '${VERSION}'
+            - name: VERSION
               value: '${VERSION}'
           ports:
             - containerPort: 3000

@@ -8,8 +8,9 @@ echo "  ENV_NAME_LONG=${ENV_NAME_LONG:?}"
 echo "  NAMESPACE=${NAMESPACE:?}"
 echo "  REGISTRY_SLASH=${REGISTRY_SLASH:?}"
 echo "  VERSION=${VERSION:?}"
+echo "  SUBDOMAIN=${SUBDOMAIN:?}"
 
 (
     cd "${root}"
-    envsubst '${NAMESPACE} ${DD_GIT_COMMIT_SHA} ${ENV_NAME_LONG} ${REGISTRY_SLASH} ${VERSION}' < service.yaml | kubectl -n "${NAMESPACE}" apply -f -
+    envsubst '${NAMESPACE} ${DD_GIT_COMMIT_SHA} ${ENV_NAME_LONG} ${REGISTRY_SLASH} ${SUBDOMAIN} ${VERSION}' < service.yaml | kubectl -n "${NAMESPACE}" apply -f -
 )
