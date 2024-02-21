@@ -2,11 +2,6 @@
 
 # FROM node:18.19.1 as base  # also doesn't work
 FROM node:20.11.1 as base
-# ^ chrome won't start with version 20.11.1
-# FROM node:16.16.0 as base
-# FROM node:16.20.2 as base
-# FROM node:17.1.0 as base
-# FROM node:16.20.2-bullseye as base
 # Chrome dependency Instalation
 RUN apt-get update && apt-get install -y \
     fonts-liberation \
