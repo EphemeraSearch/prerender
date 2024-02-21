@@ -26,8 +26,8 @@ spec:
         - name: prerender
           image: ${REGISTRY_SLASH}prerender:${VERSION}
           imagePullPolicy: Always
-          command: ['bash', '-c']
-          args: ['sleep infinity']
+          # command: ['bash', '-c']
+          # args: ['sleep infinity']
           resources:
             requests:
               cpu: '459m'
