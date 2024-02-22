@@ -46,6 +46,7 @@ WORKDIR /src
 COPY ./package.json .
 COPY ./package-lock.json .
 RUN npm install
+RUN npm install -g lev2
 COPY . .
 
 ENV CACHE_TTL=86400
