@@ -9,3 +9,4 @@ node_modules/
 db/
 keys.txt
 package-lock.heroku-working.json
+notes.txt
