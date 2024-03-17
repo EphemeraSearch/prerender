@@ -133,11 +133,21 @@ That should send a request to the Prerender server and display the prerendered p
 
 Keep in mind you will see 504s for relative URLs when accessing http://localhost:3000/http://localhost:8000 because the actual domain on that request is your prerender server. This isn't really an issue because once you proxy that request through the middleware, then the domain will be your website and those requests won't be sent to the prerender server. For instance if you want to see your relative URLS working visit `http://localhost:8000?_escaped_fragment_=`
 
+### Running in docker
+
+```
+docker run --net host -e LOG_LEVEL=DEBUG -ti -p 3000:3000 YOUR_IMAGE
+```
+
 # Customization
 
 You can clone this repo and run `server.js` OR include prerender in your project with `npm install prerender --save` to create an express-like server with custom plugins.
 
 ## Options
+
+### log level
+
+Set the `LOG_LEVEL` environment variable to `INFO`, `DEBUG`, `WARN` or `ERROR` to change the log level.
 
 ### chromeLocation
 
@@ -355,6 +365,8 @@ npm install -g lev2
 ```
 
 Set environment variable `CACHE_TTL` to the number of seconds entries should be cached for.
+
+To force a cache refresh, append `?__refresh=true` to the URL (see `lib/plugins/forceCacheRefresh.js`).
 
 ---
 
