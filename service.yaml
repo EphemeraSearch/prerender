@@ -69,6 +69,8 @@ spec:
               cpu: '459m'
               memory: '1074Mi'
           env:
+            - name: LOG_LEVEL
+              value: 'DEBUG'
             - name: BASIC_AUTH_USERNAME
               value: '${BASIC_AUTH_USERNAME}'
             - name: BASIC_AUTH_PASSWORD
