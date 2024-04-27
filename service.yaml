@@ -43,6 +43,11 @@ metadata:
     tags.datadoghq.com/service: 'prerender'
     tags.datadoghq.com/version: '${VERSION}'
 spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       app: prerender
