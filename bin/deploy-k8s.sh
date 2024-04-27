@@ -9,8 +9,10 @@ echo "  NAMESPACE=${NAMESPACE:?}"
 echo "  REGISTRY_SLASH=${REGISTRY_SLASH:?}"
 echo "  VERSION=${VERSION:?}"
 echo "  SUBDOMAIN=${SUBDOMAIN:?}"
+echo "  BASIC_AUTH_USERNAME=${BASIC_AUTH_USERNAME:?}"
+echo "  BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD:?}"
 
 (
     cd "${root}"
-    envsubst '${NAMESPACE} ${DD_GIT_COMMIT_SHA} ${ENV_NAME_LONG} ${REGISTRY_SLASH} ${SUBDOMAIN} ${VERSION}' < service.yaml | kubectl -n "${NAMESPACE}" apply -f -
+    envsubst '${BASIC_AUTH_USERNAME} ${BASIC_AUTH_PASSWORD} ${NAMESPACE} ${DD_GIT_COMMIT_SHA} ${ENV_NAME_LONG} ${REGISTRY_SLASH} ${SUBDOMAIN} ${VERSION}' < service.yaml | kubectl -n "${NAMESPACE}" apply -f -
 )

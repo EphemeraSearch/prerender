@@ -64,6 +64,10 @@ spec:
               cpu: '459m'
               memory: '1074Mi'
           env:
+            - name: BASIC_AUTH_USERNAME
+              value: '${BASIC_AUTH_USERNAME}'
+            - name: BASIC_AUTH_PASSWORD
+              value: '${BASIC_AUTH_PASSWORD}'
             - name: DD_GIT_REPOSITORY_URL
               value: 'https://github.com/EphemeraSearch/prerender'
             - name: DD_GIT_COMMIT_SHA
