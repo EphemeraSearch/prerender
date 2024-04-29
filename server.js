@@ -2,20 +2,12 @@
 var prerender = require('./lib');
 const util = require('./lib/util');
 
-var server = prerender();
-  // chromeLocation: chrome_path,
-  // logRequests: true,
-  // captureConsoleLog: true,
-  // chromeFlags: [
-    // '--no-sandbox',
-    // '--headless',
-    // '--disable-gpu',
-    // '--remote-debugging-port=9222',
-    // '--hide-scrollbars',
-    // '--remote-debugging-address=::1',
-  // ],
-  // pageLoadTimeout: Number(process.env['PAGE_LOAD_TIMEOUT']) || 40 * 1000,
-// });
+var server = prerender({
+  captureConsoleLog: true,
+  logRequests: true,
+  pageLoadTimeout: Number(process.env['PAGE_LOAD_TIMEOUT']) || 40 * 1000,
+  // note: providing chromeFlags will override the default prerender chromeFlags.
+});
 
 server.use(prerender.sendPrerenderHeader());
 server.use(prerender.browserForceRestart());
