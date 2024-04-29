@@ -1,33 +1,33 @@
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: prerender
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/backend-protocol: 'HTTP'
-    repo: prerender
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      location = /robots.txt {
-        return 200 "User-agent: *\nDisallow: /\n";
-      }
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: ${SUBDOMAIN}.ephemerasearch.com
-      http: &http_rules
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: prerender
-                port:
-                  number: 3000
-  tls:
-    - secretName: ${SUBDOMAIN}-tls
-      hosts:
-        - ${SUBDOMAIN}.ephemerasearch.com
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: prerender
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt-prod
+#     nginx.ingress.kubernetes.io/backend-protocol: 'HTTP'
+#     repo: prerender
+#     nginx.ingress.kubernetes.io/configuration-snippet: |
+#       location = /robots.txt {
+#         return 200 "User-agent: *\nDisallow: /\n";
+#       }
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - host: ${SUBDOMAIN}.ephemerasearch.com
+#       http: &http_rules
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: prerender
+#                 port:
+#                   number: 3000
+#   tls:
+#     - secretName: ${SUBDOMAIN}-tls
+#       hosts:
+#         - ${SUBDOMAIN}.ephemerasearch.com
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -71,10 +71,10 @@ spec:
           env:
             - name: LOG_LEVEL
               value: 'DEBUG'
-            - name: BASIC_AUTH_USERNAME
-              value: '${BASIC_AUTH_USERNAME}'
-            - name: BASIC_AUTH_PASSWORD
-              value: '${BASIC_AUTH_PASSWORD}'
+            # - name: BASIC_AUTH_USERNAME
+            #   value: '${BASIC_AUTH_USERNAME}'
+            # - name: BASIC_AUTH_PASSWORD
+            #   value: '${BASIC_AUTH_PASSWORD}'
             - name: DD_GIT_REPOSITORY_URL
               value: 'https://github.com/EphemeraSearch/prerender'
             - name: DD_GIT_COMMIT_SHA
