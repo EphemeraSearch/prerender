@@ -2,20 +2,20 @@
 var prerender = require('./lib');
 const util = require('./lib/util');
 
-var server = prerender({
+var server = prerender();
   // chromeLocation: chrome_path,
-  logRequests: true,
-  captureConsoleLog: true,
-  chromeFlags: [
-    '--no-sandbox',
-    '--headless',
-    '--disable-gpu',
-    '--remote-debugging-port=9222',
-    '--hide-scrollbars',
-    '--remote-debugging-address=::1',
-  ],
-  pageLoadTimeout: Number(process.env['PAGE_LOAD_TIMEOUT']) || 40 * 1000,
-});
+  // logRequests: true,
+  // captureConsoleLog: true,
+  // chromeFlags: [
+    // '--no-sandbox',
+    // '--headless',
+    // '--disable-gpu',
+    // '--remote-debugging-port=9222',
+    // '--hide-scrollbars',
+    // '--remote-debugging-address=::1',
+  // ],
+  // pageLoadTimeout: Number(process.env['PAGE_LOAD_TIMEOUT']) || 40 * 1000,
+// });
 
 server.use(prerender.sendPrerenderHeader());
 server.use(prerender.browserForceRestart());
